@@ -1,0 +1,109 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+i{
+    pointer-events: none;
+}
+body{
+    background-color: rgb(102, 154, 184);
+}
+h1{
+    font-family: arial;
+    font-weight: bold;
+    font-size: 36px;
+    text-align: center;
+}
+header{
+    height: 100px;
+    line-height: 100px;
+}
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+input, 
+button{
+    border: none;
+    padding: 0.25rem 0.5rem;
+    font-size: 1.25rem;
+    margin: 0.1rem;
+    font-weight: bold;
+}
+input[type = number]{
+    width: 50px;
+    text-align: center;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+button{
+    cursor: pointer;
+    background-color: #e38e8e;
+}
+section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.todo{
+    width: 500px;
+    height: 70px;
+    display: flex;
+    font-size: 24px;
+    font-family: arial;
+    font-weight: bold;
+    margin: 10px 0;
+    background-color: rgb(179, 206, 229);
+    padding: 15px;
+    border-radius: 10px;
+    justify-content: space-between;
+    align-items: center;
+    transition: .5s;
+}
+.todo p{
+    height: fit-content;
+}
+.todo .button-list{
+    font-size: 24px;
+    height: fit-content;
+}
+.todo button{
+    color: rgb(154, 161, 159);
+    background-color: rgb(179, 206, 229);
+    transition: .5s;
+}
+.todo .complete:hover{
+    color: rgb(23, 181, 39);
+}
+.todo .trush:hover{
+    color: #e75c5c;
+}
+
+.done{
+    opacity: .5;
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+}
+@keyframes scaleUp{
+    0%{
+        transform: scale(0);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+@keyframes scaleDown {
+    0%{
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(0);
+    }
+}
