@@ -7,19 +7,23 @@ add.addEventListener("click",e => {
     //獲得input的值
     let form = e.target.parentElement;//event的目標對象的parentElement也就是button的父層form
     let todoText = form.children[0].value;//from下的第一個物件text
-    let todoMorth = form.children[1].value;
+    let todoMonth = form.children[1].value;
     let todoDate = form.children[2].value;
 
     if(todoText === ""){
         alert("請輸入待辦事項");
         return;
-    } else if(todoMorth === ""){
+    } else if(todoMonth === ""){
         alert("請輸入月份");
         return;
     } else if(todoDate === ""){
         alert("請輸入日期");
         return;
     }
+
+    form.children[0].value = null;
+    form.children[1].value = null;
+    form.children[2].value = null;
 
     //創造todo item
     let todo = document.createElement("div");
@@ -29,7 +33,7 @@ add.addEventListener("click",e => {
     text.innerText = todoText; 
     let time = document.createElement("p");
     time.classList.add("todo-time");
-    time.innerText = todoMorth + "/" +todoDate;
+    time.innerText = todoMonth + "/" + todoDate;
     todo.appendChild(text);
     todo.appendChild(time);
 
@@ -39,9 +43,8 @@ add.addEventListener("click",e => {
     completeButton.innerHTML = '<i class="fa-solid fa-check"></i>';
     
     //點勾勾劃掉todo
-    completeButton.addEventListener("click",e =>{
-        let todoItem = todo;
-        todoItem.classList.toggle("done");
+    completeButton.addEventListener("click", () =>{
+        todo.classList.toggle("done");
     })
 
     //創建垃圾桶
@@ -50,11 +53,10 @@ add.addEventListener("click",e => {
     trushButton.innerHTML = '<i class="fa-solid fa-trash"></i>'
 
     //點垃圾桶刪除todo
-    trushButton.addEventListener("click", e => {
-        let todoItem = todo;
-        todoItem.addEventListener("animationend", () => {
-          let text = todoItem.children[0].innerText;
-          todoItem.remove();
+    trushButton.addEventListener("click", () => {
+        todo.addEventListener("animationend", () => {
+          let text = todo.children[0].innerText;
+          todo.remove();
       
           let myListArray = JSON.parse(localStorage.getItem('list'));
           myListArray.forEach((item, index) => {
@@ -65,7 +67,7 @@ add.addEventListener("click",e => {
           });
         });
       
-        todoItem.style.animation = "scaleDown 0.3s forwards";
+        todo.style.animation = "scaleDown 0.3s forwards";
       });
       
     
@@ -81,7 +83,7 @@ add.addEventListener("click",e => {
     //創建物件(使用者輸入的資料)
     let myTodo = {
         todoText:todoText,
-        todoMorth:todoMorth,
+        todoMonth:todoMonth,
         todoDate:todoDate
     };
     //在localStorage儲存輸入的資料
@@ -100,6 +102,7 @@ add.addEventListener("click",e => {
 })
 
 let myList = localStorage.getItem("list");
+//判斷localStorage是否有資料
 if(myList !== null){
     let myListArray = JSON.parse(myList);
     myListArray.forEach(item => {
@@ -110,7 +113,7 @@ if(myList !== null){
         text.innerText = item.todoText;
         let time = document.createElement('p');
         text.classList.add('todo-time');
-        time.innerText = item.todoMorth + '/' + item.todoDate;
+        time.innerText = item.todoMonth + '/' + item.todoDate;
         todo.appendChild(text);
         todo.appendChild(time);
 
@@ -128,10 +131,9 @@ if(myList !== null){
 
         //點垃圾桶刪除todo
         trushButton.addEventListener("click", e => {
-            let todoItem = todo;
-            todoItem.addEventListener("animationend", () => {
-              let text = todoItem.children[0].innerText;
-              todoItem.remove();
+            todo.addEventListener("animationend", () => {
+              let text = todo.children[0].innerText;
+              todo.remove();
           
               let myListArray = JSON.parse(localStorage.getItem('list'));
               myListArray.forEach((item, index) => {
@@ -142,7 +144,7 @@ if(myList !== null){
               });
             });
           
-            todoItem.style.animation = "scaleDown 0.3s forwards";
+            todo.style.animation = "scaleDown 0.3s forwards";
           });
           
         todo.appendChild(completeButton);
